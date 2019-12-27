@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <!-- 通过构造器注入 -->
+    <bean id="car1" class="com.chan.spring.bean.Car">
+        <!-- 通过参数顺序确定构造器 -->
+        <constructor-arg value="宝马" index="0"/>
+        <constructor-arg value="蓝色" index="1"/>
+        <constructor-arg value="800000" index="2"/>
+        <constructor-arg value="250" index="3"/>
+    </bean>
+
+    <!-- 通过构造器注入 -->
+    <bean id="car2" class="com.chan.spring.bean.Car">
+        <!-- 通过参数类型确定构造器 -->
+        <constructor-arg value="奔驰" type="java.lang.String"/>
+        <constructor-arg value="白色" type="java.lang.String"/>
+        <constructor-arg value="500000" type="double"/>
+    </bean>
+
+    <!-- 通过属性注入 -->
+    <bean id="car3" class="com.chan.spring.bean.Car">
+        <property name="brand">
+            <!-- 字面值赋值value -->
+            <value><![CDATA[<奥迪>]]></value>
+        </property>
+        <property name="color" value="黑色"/>
+        <property name="price" value="3000000"/>
+        <property name="maxSpeed" value="250"/>
+    </bean>
+
+    <!-- 字面量和引用类型的赋值方式 -->
+    <bean id="person1" class="com.chan.spring.bean.Person">
+        <constructor-arg value="小明" type="java.lang.String"/>
+        <constructor-arg>
+            <value type="int">20</value>
+        </constructor-arg>
+        <!-- 引用赋值rel -->
+        <constructor-arg ref="car1" type="com.chan.spring.bean.Car"/>
+    </bean>
+
+    <!-- 内部bean -->
+    <bean id="person2" class="com.chan.spring.bean.Person">
+        <constructor-arg value="小李" type="java.lang.String"/>
+        <constructor-arg value="22" type="int"/>
+        <constructor-arg>
+            <!-- 无法被外部访问 -->
+            <bean class="com.chan.spring.bean.Car">
+                <constructor-arg value="保时捷" index="0"/>
+                <constructor-arg value="蓝色" index="1"/>
+                <constructor-arg value="800000" index="2"/>
+                <constructor-arg value="230" index="3"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <!-- 注入级联属性 -->
+    <bean id="person3" class="com.chan.spring.bean.Person">
+        <constructor-arg value="小王" type="java.lang.String"/>
+        <constructor-arg type="int" value="24">
+        </constructor-arg>
+        <constructor-arg ref="car2" type="com.chan.spring.bean.Car"/>
+        <property name="car.maxSpeed" value="200"/>
+    </bean>
+
+    <!-- 集合属性 -->
+    <bean id="carShop1" class="com.chan.spring.bean.collection.CarShopList">
+        <constructor-arg value="上海" type="java.lang.String"/>
+        <constructor-arg type="java.util.List">
+            <list>
+                <ref bean="car1"/>
+                <ref bean="car2"/>
+                <ref bean="car3"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- 全局set -->
+    <util:set id="carSet1">
+        <ref bean="car1"/>
+        <ref bean="car2"/>
+        <bean class="com.chan.spring.bean.Car">
+            <property name="brand" value="法拉利"/>
+            <property name="color">
+                <null/>
+            </property>
+        </bean>
+    </util:set>
+
+    <!-- map -->
+    <util:map id="carMap1">
+        <entry key="car1" value-ref="car1"/>
+        <entry key="car2" value-ref="car2"/>
+        <entry key="car3" value-ref="car3"/>
+        <entry key="car4" value="汽车"/>
+    </util:map>
+
+    <!-- 引用全局Set -->
+    <bean id="carShop2" class="com.chan.spring.bean.collection.CarShopSet">
+        <property name="name" value="北京"/>
+        <property name="cars" ref="carSet1"/>
+    </bean>
+
+    <!-- properties -->
+    <bean id="dataSource1" class="com.chan.spring.bean.collection.DataSource">
+        <property name="properties">
+            <util:properties>
+                <prop key="username">root</prop>
+                <prop key="password">123456</prop>
+                <prop key="jdbcUrl">jdbc:mysql://localhost:db</prop>
+            </util:properties>
+        </property>
+    </bean>
+
+    <!-- 使用p属性命名空间 -->
+    <bean id="person4" class="com.chan.spring.bean.Person" p:name="小张" p:age="20" p:car-ref="car3"/>
+</beans>
