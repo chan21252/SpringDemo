@@ -3,14 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="car1" class="com.chan.spring.bean.Car">
+    <bean id="car1" class="com.chan.spring.bean.base.Car">
         <property name="brand" value="宝马"/>
         <property name="color" value="#{('blue' matches 'blue')?'蓝色':'其他色'}"/>
         <property name="maxSpeed" value="#{250}"/>
         <property name="price" value="500000"/>
     </bean>
 
-    <bean id="person1" class="com.chan.spring.bean.Person">
+    <bean id="person1" class="com.chan.spring.bean.base.Person">
         <property name="name" value="大表哥"/>
         <property name="car" value="#{car1}"/>
         <property name="age" value="#{T(java.lang.Math).abs(-25)}"/>

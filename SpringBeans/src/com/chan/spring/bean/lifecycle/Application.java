@@ -1,10 +1,9 @@
-package com.chan.spring.app;
+package com.chan.spring.bean.lifecycle;
 
-import com.chan.spring.bean.lifecycle.Car;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Application2 {
+public class Application {
     public static void main(String[] args) {
         String configXmlPath = "com/chan/spring/conf/";
         String configXmlFileName = "beans-lifecycle.xml";

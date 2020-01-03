@@ -1,6 +1,6 @@
 package com.chan.spring.bean.collection;
 
-import com.chan.spring.bean.Car;
+import com.chan.spring.bean.base.Car;
 
 import java.util.Set;
 

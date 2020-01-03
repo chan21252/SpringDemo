@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
        xmlns:p="http://www.springframework.org/schema/p">
     <bean id="address" class="com.chan.spring.bean.autowire.Address" p:city="上海" p:road="南京路"/>
-    <bean id="car" class="com.chan.spring.bean.Car" p:brand="奔驰" p:price="900000"/>
+    <bean id="car" class="com.chan.spring.bean.base.Car" p:brand="奔驰" p:price="900000"/>
     <!--
     <bean id="car2" class="Car" p:brand="宝马" p:price="900000" />
     -->

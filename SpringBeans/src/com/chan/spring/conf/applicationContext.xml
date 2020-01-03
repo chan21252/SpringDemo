@@ -6,7 +6,7 @@
        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
 
     <!-- 通过构造器注入 -->
-    <bean id="car1" class="com.chan.spring.bean.Car">
+    <bean id="car1" class="com.chan.spring.bean.base.Car">
         <!-- 通过参数顺序确定构造器 -->
         <constructor-arg value="宝马" index="0"/>
         <constructor-arg value="蓝色" index="1"/>
@@ -15,7 +15,7 @@
     </bean>
 
     <!-- 通过构造器注入 -->
-    <bean id="car2" class="com.chan.spring.bean.Car">
+    <bean id="car2" class="com.chan.spring.bean.base.Car">
         <!-- 通过参数类型确定构造器 -->
         <constructor-arg value="奔驰" type="java.lang.String"/>
         <constructor-arg value="白色" type="java.lang.String"/>
@@ -23,7 +23,7 @@
     </bean>
 
     <!-- 通过属性注入 -->
-    <bean id="car3" class="com.chan.spring.bean.Car">
+    <bean id="car3" class="com.chan.spring.bean.base.Car">
         <property name="brand">
             <!-- 字面值赋值value -->
             <value><![CDATA[<奥迪>]]></value>
@@ -34,22 +34,22 @@
     </bean>
 
     <!-- 字面量和引用类型的赋值方式 -->
-    <bean id="person1" class="com.chan.spring.bean.Person">
+    <bean id="person1" class="com.chan.spring.bean.base.Person">
         <constructor-arg value="小明" type="java.lang.String"/>
         <constructor-arg>
             <value type="int">20</value>
         </constructor-arg>
         <!-- 引用赋值rel -->
-        <constructor-arg ref="car1" type="com.chan.spring.bean.Car"/>
+        <constructor-arg ref="car1" type="com.chan.spring.bean.base.Car"/>
     </bean>
 
     <!-- 内部bean -->
-    <bean id="person2" class="com.chan.spring.bean.Person">
+    <bean id="person2" class="com.chan.spring.bean.base.Person">
         <constructor-arg value="小李" type="java.lang.String"/>
         <constructor-arg value="22" type="int"/>
         <constructor-arg>
             <!-- 无法被外部访问 -->
-            <bean class="com.chan.spring.bean.Car">
+            <bean class="com.chan.spring.bean.base.Car">
                 <constructor-arg value="保时捷" index="0"/>
                 <constructor-arg value="蓝色" index="1"/>
                 <constructor-arg value="800000" index="2"/>
@@ -59,11 +59,11 @@
     </bean>
 
     <!-- 注入级联属性 -->
-    <bean id="person3" class="com.chan.spring.bean.Person">
+    <bean id="person3" class="com.chan.spring.bean.base.Person">
         <constructor-arg value="小王" type="java.lang.String"/>
         <constructor-arg type="int" value="24">
         </constructor-arg>
-        <constructor-arg ref="car2" type="com.chan.spring.bean.Car"/>
+        <constructor-arg ref="car2" type="com.chan.spring.bean.base.Car"/>
         <property name="car.maxSpeed" value="200"/>
     </bean>
 
@@ -83,7 +83,7 @@
     <util:set id="carSet1">
         <ref bean="car1"/>
         <ref bean="car2"/>
-        <bean class="com.chan.spring.bean.Car">
+        <bean class="com.chan.spring.bean.base.Car">
             <property name="brand" value="法拉利"/>
             <property name="color">
                 <null/>
@@ -117,5 +117,5 @@
     </bean>
 
     <!-- 使用p属性命名空间 -->
-    <bean id="person4" class="com.chan.spring.bean.Person" p:name="小张" p:age="20" p:car-ref="car3"/>
+    <bean id="person4" class="com.chan.spring.bean.base.Person" p:name="小张" p:age="20" p:car-ref="car3"/>
 </beans>
