@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        Bean的生命周期：
+        1.通过构造器创建对象
+        2.注入依赖属性
+        3.调用初始化方法
+        4.使用对象
+        5.调用销毁方法
+        6.销毁对象
+    -->
+    <bean id="car1" class="com.chan.spring.bean.lifecycle.Car" init-method="init" destroy-method="destroy">
+        <property name="brand" value="宝马"/>
+        <property name="color" value="#{('blue' matches 'blue')?'蓝色':'其他色'}"/>
+        <property name="maxSpeed" value="#{250}"/>
+        <property name="price" value="500000"/>
+    </bean>
+
+    <bean class="com.chan.spring.bean.lifecycle.MyBeanPostProcessor" id="myBeanPostProcessor"/>
+    <bean id="car2" class="com.chan.spring.bean.lifecycle.Car" init-method="init" destroy-method="destroy">
+        <property name="brand" value="奔驰"/>
+        <property name="color" value="白色"/>
+        <property name="maxSpeed" value="200"/>
+        <property name="price" value="500000"/>
+    </bean>
+</beans>

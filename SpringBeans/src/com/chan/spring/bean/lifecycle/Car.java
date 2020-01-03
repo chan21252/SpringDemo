@@ -1,4 +1,4 @@
-package com.chan.spring.bean;
+package com.chan.spring.bean.lifecycle;
 
 /**
  * 汽车类
