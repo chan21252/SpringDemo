@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        静态工厂方法创建Bean对象
+        使用静态工厂类，指定factory-method方法创建对象
+        通过constructor-arg传入参数
+    -->
+    <bean class="com.chan.spring.bean.factory.CarStaticFactory" id="car1" factory-method="getCar">
+        <constructor-arg value="Audi" />
+    </bean>
+
+    <!--
+        创建实例工厂对象
+    -->
+    <bean class="com.chan.spring.bean.factory.CarInstanceFactory" id="carInstanceFactory"/>
+
+    <!--
+        factory-bean指定工厂对象
+        factory-method指定创建对象的工厂方法
+        constructor-arg传入参数
+    -->
+    <bean id="car2" factory-bean="carInstanceFactory" factory-method="getCar">
+        <constructor-arg value="BMW" />
+    </bean>
+
+    <!--
+        FactoryBean创建对象
+    -->
+    <bean id="carFactoryBean" class="com.chan.spring.bean.factory.CarFactoryBean">
+        <property name="brand" value="benz" />
+        <property name="color" value="white" />
+        <property name="maxSpeed" value="250" />
+        <property name="price" value="200000" />
+    </bean>
+
+</beans>
