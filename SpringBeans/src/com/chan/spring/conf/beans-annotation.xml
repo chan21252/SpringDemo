@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+    <!--
+        指定IOC容器扫描的包
+        resource-pattern：指定扫描特定的类
+        use-default-filters：不使用默认的过滤器
+            true：扫描所有带注解的类，排除exclude-filter，include-filter无效
+    -->
+    <!--
+    <context:component-scan base-package="com.chan.spring.bean.annotation"
+                            resource-pattern="service/*"/>
+                            -->
+    <context:component-scan base-package="com.chan.spring.bean.annotation"
+                            use-default-filters="false">
+        <!--
+            排除有org.springframework.stereotype.Repository注解的类
+        -->
+
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+
+        <!--
+            只包含有org.springframework.stereotype.Repository注解的类
+        -->
+        <!--
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+        -->
+
+        <!--
+            只包含有UserRepository接口和实现类
+        -->
+        <!--
+        <context:exclude-filter type="assignable" expression="com.chan.spring.bean.annotation.repository.UserRepository"/>
+        -->
+    </context:component-scan>
+</beans>
