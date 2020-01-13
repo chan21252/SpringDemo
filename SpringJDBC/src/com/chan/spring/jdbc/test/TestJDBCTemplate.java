@@ -2,7 +2,6 @@ package com.chan.spring.jdbc.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.chan.spring.jdbc.beans.Employee;
-import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -50,7 +49,7 @@ public class TestJDBCTemplate {
     @Test
     public void testBatchUpdate() {
         String sql = "INSERT INTO employee (name, email, department_id) VALUES (?, ?, ?)";
-        List<Object[]> batchArgs = new ArrayList<>();
+        List<Object[]> batchArgs = new ArrayList<Object[]>();
         batchArgs.add(new Object[]{"Tom", "tom@spring.com", 1});
         batchArgs.add(new Object[]{"Jerry", "jerry@spring.com", 2});
         batchArgs.add(new Object[]{"Bob", "bob@spring.com", 1});
@@ -63,7 +62,7 @@ public class TestJDBCTemplate {
     @Test
     public void testQueryForObject() {
         String sql = "SELECT id, name, email, department_id FROM employee WHERE id = ?";
-        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
         Employee employee = jdbcTemplate.queryForObject(sql, rowMapper, 3);
         System.out.println(employee);
     }
@@ -75,7 +74,7 @@ public class TestJDBCTemplate {
     public void testQueryForList() {
         //查询员工
         String sql = "SELECT id, name, email, department_id FROM employee WHERE id > ?";
-        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<>(Employee.class);
+        RowMapper<Employee> rowMapper = new BeanPropertyRowMapper<Employee>(Employee.class);
         List<Employee> employeeList = jdbcTemplate.query(sql, rowMapper, 3);
         System.out.println(employeeList);
 

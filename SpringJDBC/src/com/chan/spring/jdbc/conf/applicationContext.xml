@@ -3,15 +3,33 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-    <context:property-placeholder location="classpath:com/chan/spring/jdbc/conf/db.properties"/>
+
+    <context:property-placeholder location="classpath:com/chan/spring/jdbc/conf/druid.properties"/>
 
     <!-- 配置druid连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <property name="url" value="${jdbc_url}"/>
-        <property name="username" value="${jdbc_user}"/>
-        <property name="password" value="${jdbc_password}"/>
+        <!--
+        <property name="url" value="${url}"/>
+        <property name="username" value="${username}"/>
+        <property name="password" value="${password}"/>
         <property name="maxActive" value="${maxActive}"/>
         <property name="initialSize" value="${initialSize}"/>
+        -->
+        <!--
+            从本地文件读取JDBC配置：
+            （1）filters属性启用config
+            （2）config.file=file://从本地文件读取DataSource配置
+
+            加密数据库密码
+            （1）java -cp druid-1.1.18.jar com.alibaba.druid.filter.config.ConfigTools 你的密码
+            （2）生成公钥，私钥，和密码密文，在properties文件中password=密码密文
+            （3）开启解密，并指定公钥。config.decrypt=true;config.decrypt.key=${public_key};
+
+            参考：https://github.com/alibaba/druid/wiki/%E4%BD%BF%E7%94%A8ConfigFilter
+        -->
+        <property name="filters" value="config"/>
+        <property name="connectionProperties"
+                  value="config.decrypt=true;config.decrypt.key=${public_key};config.file=file://F://projects/java/db.properties"/>
     </bean>
 
     <bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
