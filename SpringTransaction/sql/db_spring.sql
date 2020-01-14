@@ -8,12 +8,12 @@ DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`
 (
     `id`       int(10) UNSIGNED                                              NOT NULL AUTO_INCREMENT COMMENT '用户id',
-    `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
+    `username` varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '用户名',
     `balance`  decimal(10, 2)                                                NOT NULL COMMENT '账户余额',
     PRIMARY KEY (`id`) USING BTREE,
     UNIQUE INDEX `unique_username` (`username`) USING BTREE
 ) ENGINE = InnoDB
-  AUTO_INCREMENT = 3
+  AUTO_INCREMENT = 1
   CHARACTER SET = utf8mb4
   COLLATE = utf8mb4_general_ci
   ROW_FORMAT = Dynamic;
@@ -32,8 +32,8 @@ VALUES (2, 'jack', 200.00);
 DROP TABLE IF EXISTS `book`;
 CREATE TABLE `book`
 (
-    `isbn`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `name`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+    `isbn`  varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL,
+    `name`  varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL,
     `price` decimal(10, 2)                                                NOT NULL,
     PRIMARY KEY (`isbn`) USING BTREE
 ) ENGINE = InnoDB
@@ -57,8 +57,8 @@ VALUES ('978-7-302-46513-3', 'Hadoop权威指南', 148.00);
 DROP TABLE IF EXISTS `book_stock`;
 CREATE TABLE `book_stock`
 (
-    `isbn`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-    `stock` int(11)                                                       NULL DEFAULT NULL,
+    `isbn`  varchar(48) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL,
+    `stock` int(11)                                                       NULL DEFAULT 0,
     PRIMARY KEY (`isbn`) USING BTREE,
     CONSTRAINT `fk_isbn` FOREIGN KEY (`isbn`) REFERENCES `book` (`isbn`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB
