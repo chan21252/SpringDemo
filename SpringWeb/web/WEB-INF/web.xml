@@ -5,11 +5,18 @@
          version="4.0">
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:applicationContext.xml</param-value>
+        <param-value>WEB-INF/applicationContext.xml</param-value>
     </context-param>
 
+    <!--
     <listener>
         <listener-class>com.chan.spring.web.listener.SpringServletContextListener</listener-class>
+    </listener>
+    -->
+
+    <!-- spring提供的ServletContext监听器 -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
     <servlet>
         <servlet-name>TestServlet</servlet-name>

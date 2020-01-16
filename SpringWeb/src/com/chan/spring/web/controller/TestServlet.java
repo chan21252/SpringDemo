@@ -2,6 +2,7 @@ package com.chan.spring.web.controller;
 
 import com.chan.spring.web.bean.User;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,7 +21,8 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext servletContext = getServletContext();
-        ApplicationContext ctx = (ApplicationContext) servletContext.getAttribute("applicationContext");
+        //ApplicationContext ctx = (ApplicationContext) servletContext.getAttribute("applicationContext");
+        ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(servletContext);
         User user1 = (User) ctx.getBean("user1");
 
         request.setCharacterEncoding("UTF-8");
