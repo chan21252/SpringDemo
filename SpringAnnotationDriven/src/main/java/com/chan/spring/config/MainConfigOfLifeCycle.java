@@ -1,8 +1,8 @@
 package com.chan.spring.config;
 
 import com.chan.spring.pojo.Person;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Scope;
+import com.chan.spring.pojo.animal.Cat;
+import org.springframework.context.annotation.*;
 
 /**
  * MainConfigOfLifeCycle
@@ -10,6 +10,10 @@ import org.springframework.context.annotation.Scope;
  * @author Chan
  * @since 2020/3/23
  */
+@Configuration
+@ComponentScan(basePackages = "com.chan.spring", includeFilters = {
+        @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = {MyBeanPostProcessor.class})
+}, useDefaultFilters = false)
 public class MainConfigOfLifeCycle {
 
     @Scope("singleton")
@@ -17,5 +21,13 @@ public class MainConfigOfLifeCycle {
     public Person tom() {
         System.out.println("创建tom");
         return new Person("tom", 1, 1);
+    }
+
+    @Bean(name = "didi", initMethod = "init", destroyMethod = "destroy2")
+    public Cat didi() {
+        System.out.println("创建弟弟");
+        Cat didi = new Cat();
+        didi.setName("弟弟");
+        return didi;
     }
 }
