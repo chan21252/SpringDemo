@@ -1,10 +1,8 @@
 package com.chan.spring.controller;
 
 import com.chan.spring.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
-import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  * PersonController
@@ -21,8 +19,7 @@ public class PersonController {
         return personService;
     }
 
-    @Inject
-    @Named("personService1")
+    @Autowired
     public void setPersonService(PersonService personService) {
         this.personService = personService;
     }
